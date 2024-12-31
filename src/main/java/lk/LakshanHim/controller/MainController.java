@@ -4,6 +4,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import lk.LakshanHim.model.MainModel;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
+
+import java.util.Stack;
 
 import static java.awt.SystemColor.text;
 
@@ -40,19 +47,19 @@ public class MainController {
     private Button btn9;
 
     @FXML
-    private Button btnAdd;
+    private Button btnx;
 
     @FXML
-    private Button btnClear;
+    private Button btny;
+
+    @FXML
+    private Button btnAdd;
 
     @FXML
     private Button btnDecimal;
 
     @FXML
     private Button btnDivide;
-
-    @FXML
-    private Button btnEquals;
 
     @FXML
     private Button btnMultiply;
@@ -67,6 +74,24 @@ public class MainController {
     @FXML
     void btnAdd(ActionEvent event) {
     }
+    @FXML
+    void btnClear(ActionEvent event) {
+        display.clear();
+    }
+    @FXML
+    void btnEquals(ActionEvent event) {
+        String input = display.getText();
+        try {
+            double result = MainModel.evaluateExpression(input);
+            display.setText(String.valueOf(result));
+
+        } catch (Exception e) {
+            display.setText("Error");
+        }
+
+    }
+
+
 
     public void initialize(){
         btn0.setOnAction(event -> handleButtonClick(btn0));
@@ -84,6 +109,8 @@ public class MainController {
         btnDivide.setOnAction(event -> handleButtonClick(btnDivide));
         btnMultiply.setOnAction(event -> handleButtonClick(btnMultiply));
         btnSubtract.setOnAction(event -> handleButtonClick(btnSubtract));
+        btnx.setOnAction(event -> handleButtonClick(btnx));
+        btny.setOnAction(event -> handleButtonClick(btny));
     }
 
     private void handleButtonClick(Button button) {
